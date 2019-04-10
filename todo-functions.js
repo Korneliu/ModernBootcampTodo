@@ -12,6 +12,7 @@ const getSavedTodos = function() {
 const saveTodos = function(todos) {
   localStorage.setItem('todos', JSON.stringify(todos))
 }
+
 //render application todos based on filters
 const renderTodos = function (todos, filters) {
   const filteredTodos = todos.filter(function (todo) {
@@ -32,9 +33,25 @@ const renderTodos = function (todos, filters) {
 }
 //get the DOM elements for an individual note
 const generateTodoDOM = function (todo) {
-  const p = document.createElement('p')
-  p.textContent = todo.text
-  return p
+  const todoEl = document.createElement('div')
+
+  //Setup checkbox
+  const checkbox = document.createElement('input')
+  checkbox.setAttribute('type', 'checkbox')
+  todoEl.appendChild(checkbox)
+
+  //Setup the todo text
+  const textEl = document.createElement('span')
+  textEl.textContent = todo.text
+
+  //Setup the remove button
+  const button = document.createElement('button')
+  button.textContent = 'Remove'
+  
+  todoEl.appendChild(textEl)
+  todoEl.appendChild(button)
+
+  return todoEl
 }
 
 //Get the DOM elements for list summary
